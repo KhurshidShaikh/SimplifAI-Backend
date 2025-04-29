@@ -53,11 +53,31 @@ This repository includes a `render.yaml` file that configures the deployment.
    - **Name**: Choose a name for your service
    - **Runtime**: Python
    - **Build Command**: `pip install -r requirements.txt`
-   - **Start Command**: `gunicorn run:app`
+   - **Start Command**: `gunicorn "run:app"`
 6. Add the required environment variables:
    - `GEMINI_API_KEY`: Your Google Gemini API key
    - `OCR_SPACE_API_KEY`: Your OCR.space API key
 7. Click "Create Web Service" to deploy
+
+### Troubleshooting Deployment Issues
+
+If you encounter issues during deployment, try these solutions:
+
+1. **App Not Found Error**: If you see an error like `Failed to find attribute 'app' in 'app'`:
+   - Ensure your Procfile has quotes: `web: gunicorn "run:app"`
+   - Try using the alternative wsgi file: `web: gunicorn wsgi:app`
+
+2. **Module Not Found Errors**:
+   - Check that all dependencies are in requirements.txt
+   - Make sure there are no Windows-specific packages
+
+3. **Tesseract OCR Issues**:
+   - Verify that apt-packages.txt is being recognized by Render
+   - You may need to manually add the packages under "Advanced" settings
+
+4. **Environment Variable Problems**:
+   - Double-check that all required env variables are set in Render dashboard
+   - Variables are case-sensitive
 
 ## API Endpoints
 
