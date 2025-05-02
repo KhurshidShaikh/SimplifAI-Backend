@@ -3,8 +3,8 @@ services:
     name: simplifai-backend
     runtime: python
     buildCommand: pip install -r requirements.txt
-    # Primary start command using the run.py file
-    startCommand: gunicorn "run:app"
+    # Primary start command using the main.py file
+    startCommand: gunicorn "main:app"
     # Alternative if the above doesn't work: startCommand: gunicorn wsgi:app
     envVars:
       - key: PYTHON_VERSION
